@@ -1,0 +1,470 @@
+2023-11-25 16:08:06 [INFO] Question: Which top 3 countries are most happiest one ??
+2023-11-25 16:08:06 [INFO] Running PandasAI with openai LLM...
+2023-11-25 16:08:06 [INFO] Prompt ID: dbc52e5f-a9d0-4380-aac9-e0b99c1ddca8
+2023-11-25 16:08:06 [INFO] Using prompt: You are provided with the following pandas DataFrames:
+
+<dataframe>
+Dataframe dfs[0], with 156 rows and 9 columns.
+This is the metadata of the dataframe dfs[0]:
+Overall rank,Country or region,Score,GDP per capita,Social support,Healthy life expectancy,Freedom to make life choices,Generosity,Perceptions of corruption
+1,Finland,7.769,1.34,1.587,0.986,0.596,0.153,0.393
+3,Norway,7.554,1.488,1.582,1.028,0.603,0.271,0.341
+2,Denmark,7.6,1.383,1.573,0.996,0.592,0.252,0.41
+</dataframe>
+
+<conversation>
+User: Which top 3 countries are most happiest one ??
+</conversation>
+
+This is the initial python function. Do not change the params. Given the context, use the right dataframes.
+```python
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+```
+
+Take a deep breath and reason step-by-step. Act as a senior data analyst.
+In the answer, you must never write the "technical" names of the tables.
+Based on the last message in the conversation:
+- return the updated analyze_data function wrapped within ```python ```
+2023-11-25 16:08:34 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2023-11-25 16:08:34 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+    
+    # Prepare: No preprocessing or cleaning required
+    
+    # Process: Sort the dataframe by the 'Score' column in descending order
+    sorted_df = dfs[0].sort_values(by='Score', ascending=False)
+    
+    # Analyze: Get the top 3 happiest countries
+    top_3_countries = sorted_df['Country or region'].head(3).tolist()
+    
+    # Return the result as a string
+    result = ", ".join(top_3_countries)
+    return {"type": "string", "value": f"The top 3 happiest countries are: {result}."}
+```
+
+2023-11-25 16:08:34 [INFO] Saving charts to D:\ChatCSV_PandasAI_OpenAI_Stream_lit\temp_chart.png
+2023-11-25 16:08:34 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png" }
+    """
+    sorted_df = dfs[0].sort_values(by='Score', ascending=False)
+    top_3_countries = sorted_df['Country or region'].head(3).tolist()
+    result = ', '.join(top_3_countries)
+    return {'type': 'string', 'value': f'The top 3 happiest countries are: {result}.'}
+        ```
+2023-11-25 16:08:34 [INFO] Answer: {'type': 'string', 'value': 'The top 3 happiest countries are: Finland, Denmark, Norway.'}
+2023-11-25 16:08:34 [INFO] Executed in: 28.27159023284912s
+2023-11-25 16:10:05 [INFO] Question: Which are top 3 least happiest countries ??
+2023-11-25 16:10:05 [INFO] Running PandasAI with openai LLM...
+2023-11-25 16:10:05 [INFO] Prompt ID: 25ddf8ac-5ae2-4e39-9927-7ec08bc7782b
+2023-11-25 16:10:05 [INFO] Using prompt: You are provided with the following pandas DataFrames:
+
+<dataframe>
+Dataframe dfs[0], with 156 rows and 9 columns.
+This is the metadata of the dataframe dfs[0]:
+Overall rank,Country or region,Score,GDP per capita,Social support,Healthy life expectancy,Freedom to make life choices,Generosity,Perceptions of corruption
+3,Norway,7.554,1.488,1.582,1.028,0.603,0.271,0.341
+2,Denmark,7.6,1.383,1.573,0.996,0.592,0.252,0.41
+1,Finland,7.769,1.34,1.587,0.986,0.596,0.153,0.393
+</dataframe>
+
+<conversation>
+User: Which are top 3 least happiest countries ??
+</conversation>
+
+This is the initial python function. Do not change the params. Given the context, use the right dataframes.
+```python
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+```
+
+Take a deep breath and reason step-by-step. Act as a senior data analyst.
+In the answer, you must never write the "technical" names of the tables.
+Based on the last message in the conversation:
+- return the updated analyze_data function wrapped within ```python ```
+2023-11-25 16:10:54 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2023-11-25 16:10:54 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+    
+    # Extract the required dataframe from the list of dataframes
+    df = dfs[0]
+    
+    # Sort the dataframe by the 'Score' column in ascending order
+    sorted_df = df.sort_values('Score')
+    
+    # Get the top 3 least happiest countries
+    least_happy_countries = sorted_df.head(3)['Country or region'].tolist()
+    
+    # Return the result as a string
+    result = f"The top 3 least happiest countries are: {', '.join(least_happy_countries)}"
+    return {"type": "string", "value": result}
+```
+
+2023-11-25 16:10:54 [INFO] Saving charts to D:\ChatCSV_PandasAI_OpenAI_Stream_lit\temp_chart.png
+2023-11-25 16:10:54 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png" }
+    """
+    df = dfs[0]
+    sorted_df = df.sort_values('Score')
+    least_happy_countries = sorted_df.head(3)['Country or region'].tolist()
+    result = f"The top 3 least happiest countries are: {', '.join(least_happy_countries)}"
+    return {'type': 'string', 'value': result}
+        ```
+2023-11-25 16:10:54 [INFO] Answer: {'type': 'string', 'value': 'The top 3 least happiest countries are: South Sudan, Central African Republic, Afghanistan'}
+2023-11-25 16:10:54 [INFO] Executed in: 48.76412796974182s
+2023-11-25 16:13:03 [INFO] Question: what is the score of Finland??
+
+2023-11-25 16:13:03 [INFO] Running PandasAI with openai LLM...
+2023-11-25 16:13:03 [INFO] Prompt ID: 3b93711a-d47d-4754-a479-ee3288f719e2
+2023-11-25 16:13:03 [INFO] Using prompt: You are provided with the following pandas DataFrames:
+
+<dataframe>
+Dataframe dfs[0], with 156 rows and 9 columns.
+This is the metadata of the dataframe dfs[0]:
+Overall rank,Country or region,Score,GDP per capita,Social support,Healthy life expectancy,Freedom to make life choices,Generosity,Perceptions of corruption
+3,Norway,7.554,1.488,1.582,1.028,0.603,0.271,0.341
+2,Denmark,7.6,1.383,1.573,0.996,0.592,0.252,0.41
+1,Finland,7.769,1.34,1.587,0.986,0.596,0.153,0.393
+</dataframe>
+
+<conversation>
+User: what is the score of Finland??
+
+</conversation>
+
+This is the initial python function. Do not change the params. Given the context, use the right dataframes.
+```python
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+```
+
+Take a deep breath and reason step-by-step. Act as a senior data analyst.
+In the answer, you must never write the "technical" names of the tables.
+Based on the last message in the conversation:
+- return the updated analyze_data function wrapped within ```python ```
+2023-11-25 16:13:52 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2023-11-25 16:13:52 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+    # Extract the relevant dataframe from the list of dataframes
+    df = dfs[0]
+    
+    # Filter the dataframe to get the row for Finland
+    finland_row = df[df['Country or region'] == 'Finland']
+    
+    # Get the score of Finland
+    score = finland_row['Score'].values[0]
+    
+    # Return the score as a string
+    return {"type": "string", "value": f"The score of Finland is {score}."}
+```
+
+2023-11-25 16:13:52 [INFO] Saving charts to D:\ChatCSV_PandasAI_OpenAI_Stream_lit\temp_chart.png
+2023-11-25 16:13:52 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png" }
+    """
+    df = dfs[0]
+    finland_row = df[df['Country or region'] == 'Finland']
+    score = finland_row['Score'].values[0]
+    return {'type': 'string', 'value': f'The score of Finland is {score}.'}
+        ```
+2023-11-25 16:13:52 [INFO] Answer: {'type': 'string', 'value': 'The score of Finland is 7.769.'}
+2023-11-25 16:13:52 [INFO] Executed in: 49.830426931381226s
+2023-11-25 16:21:41 [INFO] Question: what is the score of Denmark ??
+2023-11-25 16:21:41 [INFO] Running PandasAI with openai LLM...
+2023-11-25 16:21:41 [INFO] Prompt ID: 722ced70-d05f-49f8-8473-109b31b5dd93
+2023-11-25 16:21:41 [INFO] Using prompt: You are provided with the following pandas DataFrames:
+
+<dataframe>
+Dataframe dfs[0], with 156 rows and 9 columns.
+This is the metadata of the dataframe dfs[0]:
+Overall rank,Country or region,Score,GDP per capita,Social support,Healthy life expectancy,Freedom to make life choices,Generosity,Perceptions of corruption
+3,Norway,7.554,1.488,1.582,1.028,0.603,0.271,0.341
+1,Finland,7.769,1.34,1.587,0.986,0.596,0.153,0.393
+2,Denmark,7.6,1.383,1.573,0.996,0.592,0.252,0.41
+</dataframe>
+
+<conversation>
+User: what is the score of Denmark ??
+</conversation>
+
+This is the initial python function. Do not change the params. Given the context, use the right dataframes.
+```python
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+```
+
+Take a deep breath and reason step-by-step. Act as a senior data analyst.
+In the answer, you must never write the "technical" names of the tables.
+Based on the last message in the conversation:
+- return the updated analyze_data function wrapped within ```python ```
+2023-11-25 16:22:25 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2023-11-25 16:22:25 [INFO] Code generated:
+```
+# TODO import all the dependencies required
+import pandas as pd
+
+def analyze_data(dfs: list[pd.DataFrame]) -> dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "temp_chart.png" }
+    """
+    # Extract the relevant dataframe from the list of dataframes
+    df = dfs[0]
+    
+    # Filter the dataframe to get the row for Denmark
+    denmark_row = df[df['Country or region'] == 'Denmark']
+    
+    # Get the score of Denmark
+    denmark_score = denmark_row['Score'].values[0]
+    
+    # Return the score as a string
+    return {"type": "string", "value": f"The score of Denmark is {denmark_score}."}
+```
+
+2023-11-25 16:22:25 [INFO] Saving charts to D:\ChatCSV_PandasAI_OpenAI_Stream_lit\temp_chart.png
+2023-11-25 16:22:25 [INFO] 
+Code running:
+```
+def analyze_data(dfs: list[pd.DataFrame]) ->dict:
+    """
+    Analyze the data, using the provided dataframes (`dfs`).
+    1. Prepare: Preprocessing and cleaning data if necessary
+    2. Process: Manipulating data for analysis (grouping, filtering, aggregating, etc.)
+    3. Analyze: Conducting the actual analysis (if the user asks to plot a chart you must save it as an image in D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png and not show the chart.)
+    If the user requests to create a chart, utilize the Python matplotlib library to generate high-quality graphics that will be saved directly to a file.
+    At the end, return a dictionary of:
+    - type (possible values "string", "number", "dataframe", "plot")
+    - value (can be a string, a dataframe or the path of the plot, NOT a dictionary)
+    Examples: 
+        { "type": "string", "value": f"The highest salary is {highest_salary}." }
+        or
+        { "type": "number", "value": 125 }
+        or
+        { "type": "dataframe", "value": pd.DataFrame({...}) }
+        or
+        { "type": "plot", "value": "D:/ChatCSV_PandasAI_OpenAI_Stream_lit/temp_chart.png" }
+    """
+    df = dfs[0]
+    denmark_row = df[df['Country or region'] == 'Denmark']
+    denmark_score = denmark_row['Score'].values[0]
+    return {'type': 'string', 'value': f'The score of Denmark is {denmark_score}.'}
+        ```
+2023-11-25 16:22:25 [INFO] Answer: {'type': 'string', 'value': 'The score of Denmark is 7.6.'}
+2023-11-25 16:22:25 [INFO] Executed in: 44.02443885803223s
